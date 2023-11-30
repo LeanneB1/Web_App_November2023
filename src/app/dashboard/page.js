@@ -16,7 +16,7 @@ import { createTheme } from '@mui/material/styles';
 import { green, purple } from '@mui/material/colors';
 import { useState, useEffect } from 'react';
 
-import { withIronSessionApiRoute } from "iron-session";
+import { withIronSessionApiRoute } from "iron-session/next";
 
 export default function Page() {
 //
