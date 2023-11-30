@@ -27,19 +27,12 @@ export default function Page() {
   calling the fetch to get things from the database.
   */ 
   async function runDBCallAsync(url) {
-
-
     const res = await fetch(url);
     const data = await res.json();
-
- 
-    if(data.data== "valid"){
-      console.log("login is valid!")
-
-      
+    if(data.data== "true"){
+    console.log("registered")
     } else {
-
-      console.log("not valid  ")
+    console.log("not registered ")
     }
   }
 
@@ -49,32 +42,19 @@ export default function Page() {
   When the button is clicked, this is the event that is fired.
   The first thing we need to do is prevent the default refresh of the page.
   */
-	const handleSubmit = (event) => {
-		
-		console.log("handling submit");
-
-
+  const handleSubmit = (event) => {
+    console.log("handling submit");
     event.preventDefault();
-  
-		const data = new FormData(event.currentTarget);
-
-
+    const data = new FormData(event.currentTarget);
     let email = data.get('email')
-		let pass = data.get('pass')
-
+    let pass = data.get('pass')
+    let dob = data.get('dob')
     console.log("Sent email:" + email)
     console.log("Sent pass:" + pass)
-
-
-    runDBCallAsync(`http://localhost:3000/api/login?email=${email}&pass=${pass}`)
-
-
-
-
-  }; // end handler
-
-
-
+    console.log("Sent dob:" + dob)
+    runDBCallAsync(`http://localhost:3000/api/register?email=${email}&
+    pass=${pass}&dob=${dob}`)
+    }; // end handler
 
   
   const theme = createTheme({
@@ -108,42 +88,49 @@ export default function Page() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="pass"
-            label="Pass"
-            type="pass"
-            id="pass"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign In
-          </Button>
-
-
-
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1 }}>
+        <TextField
+        margin="normal"
+        required
+        fullWidth
+        id="email"
+        label="Email Address"
+        name="email"
+        autoComplete="email"
+        autoFocus
+        />
+        <TextField
+        margin="normal"
+        required
+        fullWidth
+        name="pass"
+        label="Pass"
+        type="pass"
+        id="pass"
+        autoComplete="current-password"
+        />
+        <TextField
+        margin="normal"
+        required
+        fullWidth
+        name="dob"
+        label="dob"
+        type="text"
+        id="dob"
+        autoComplete=""
+        />
+        <FormControlLabel
+        control={<Checkbox value="remember" color="primary" />}
+        label="Remember me"
+        />
+        <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+        >
+        Register
+        </Button>
 
           <Grid container>
             <Grid item xs>
