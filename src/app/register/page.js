@@ -52,7 +52,7 @@ export default function Page() {
     console.log("Sent email:" + email)
     console.log("Sent pass:" + pass)
     console.log("Sent dob:" + dob)
-    runDBCallAsync(`http://localhost:3000/api/register?email=${email}&
+    runDBCallAsync(`api/register?email=${email}&
     pass=${pass}&dob=${dob}`)
     }; // end handler
 
